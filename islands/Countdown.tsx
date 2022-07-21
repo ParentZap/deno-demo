@@ -16,15 +16,13 @@ export default function Countdown(props: { target: string }) {
   // date as long as the component is mounted.
   useEffect(() => {
     const timer = setInterval(() => {
-      setNow((now) => {
-        if (now > target) {
-          clearInterval(timer);
-        }
-        return new Date();
-      });
+      if (now > target) {
+        clearInterval(timer);
+      }
+      setNow(new Date());
     }, 1000);
     return () => clearInterval(timer);
-  }, [props.target]);
+  });
 
   // If the target date has passed, we stop counting down.
   if (now > target) {
